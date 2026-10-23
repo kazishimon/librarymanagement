@@ -1,0 +1,1709 @@
+/* ============================================================
+   CSS変数・リセット
+   ============================================================ */
+:root {
+  --primary: hsl(160, 30%, 30%);
+  --primary-light: hsl(160, 20%, 95%);
+  --primary-fg: #fff;
+  --secondary: hsl(210, 25%, 35%);
+  --secondary-fg: #fff;
+  --bg: hsl(40, 33%, 98%);
+  --fg: hsl(220, 20%, 20%);
+  --border: hsl(40, 20%, 88%);
+  --card-bg: #fff;
+  --muted: hsl(220, 10%, 42%);
+  --muted-bg: hsl(40, 10%, 95%);
+  --input-border: hsl(40, 20%, 80%);
+  --danger: hsl(0, 68%, 50%);
+  --danger-light: hsl(0, 100%, 97%);
+  --green: hsl(142, 45%, 35%);
+  --green-light: hsl(142, 45%, 95%);
+  --accent: hsl(35, 67%, 46%);
+  --radius: 4px;
+  --radius-lg: 8px;
+  --shadow: 0 1px 4px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.12);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; overflow-x: hidden; }
+body { background: var(--bg); color: var(--fg); min-height: 100vh; overflow-x: hidden; }
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+table { border-collapse: collapse; width: 100%; }
+
+/* ============================================================
+   ヘッダー・ナビ
+   ============================================================ */
+header {
+  background: var(--primary);
+  color: var(--primary-fg);
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  height: 58px;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  gap: .15rem;
+  flex-wrap: nowrap;
+  margin-left: auto;
+  overflow-x: auto;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .75rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255,255,255,.75);
+  font-size: .82rem;
+  font-weight: 500;
+  border-radius: var(--radius) var(--radius) 0 0;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
+.tab-btn.active { background: var(--bg); color: var(--fg); border-bottom-color: var(--primary); }
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--primary-fg);
+  padding: .25rem;
+}
+
+/* ============================================================
+   メインレイアウト
+   ============================================================ */
+main { max-width: 1300px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ============================================================
+   パネルヘッダー
+   ============================================================ */
+.panel-header { margin-bottom: 1.1rem; }
+.panel-header h2 { font-size: 1.15rem; font-weight: 700; }
+.panel-desc { color: var(--muted); font-size: .85rem; margin-top: .2rem; }
+
+/* ============================================================
+   カード
+   ============================================================ */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   フォーム共通
+   ============================================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .85rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group--full { grid-column: span 1 !important; }
+}
+
+.form-group--full { grid-column: span 2; }
+
+.form-group { display: flex; flex-direction: column; gap: .3rem; }
+.form-group label { font-size: .82rem; font-weight: 500; color: var(--fg); }
+.required { color: var(--danger); }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: .45rem .65rem;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  font-size: .9rem;
+  background: #fff;
+  transition: border-color .15s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(30,100,70,.15);
+}
+
+.form-group textarea { resize: vertical; min-height: 72px; }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin-top: 1.1rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   ISBN入力行
+   ============================================================ */
+.isbn-row {
+  display: flex;
+  align-items: flex-end;
+  gap: .75rem;
+  margin-bottom: .75rem;
+  flex-wrap: wrap;
+}
+
+.isbn-msg {
+  font-size: .83rem;
+  min-height: 1.2rem;
+  margin-bottom: .75rem;
+  padding: .3rem .65rem;
+  border-radius: var(--radius);
+}
+
+.isbn-msg.success { color: var(--green); background: var(--green-light); }
+.isbn-msg.error   { color: var(--danger); background: var(--danger-light); }
+.isbn-msg.loading { color: var(--muted); background: var(--muted-bg); }
+
+.result-msg {
+  font-size: .83rem;
+  min-height: 1.2rem;
+  margin-top: .6rem;
+  padding: .3rem .65rem;
+  border-radius: var(--radius);
+}
+
+.result-msg.success { color: var(--green); background: var(--green-light); }
+.result-msg.error   { color: var(--danger); background: var(--danger-light); }
+
+/* ============================================================
+   ボタン
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .9rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: .85rem;
+  font-weight: 500;
+  transition: filter .15s, background .15s;
+  white-space: nowrap;
+}
+
+.btn:hover   { filter: brightness(.93); }
+.btn:active  { filter: brightness(.87); }
+.btn:disabled { opacity: .55; cursor: not-allowed; filter: none; }
+
+.btn-primary   { background: var(--primary); color: var(--primary-fg); }
+.btn-secondary { background: var(--secondary); color: var(--secondary-fg); }
+.btn-ghost     { background: transparent; border: 1px solid var(--input-border); color: var(--fg); }
+.btn-ghost:hover { background: var(--muted-bg); }
+.btn-danger    { background: var(--danger); color: #fff; }
+
+.btn-icon {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  justify-content: center;
+  border-radius: var(--radius);
+  background: transparent;
+  border: 1px solid var(--input-border);
+  color: var(--muted);
+}
+
+.btn-icon:hover { background: var(--muted-bg); color: var(--fg); }
+.btn-icon.danger:hover { background: var(--danger-light); color: var(--danger); border-color: hsl(0,60%,80%); }
+.btn-sm { padding: .3rem .7rem; font-size: .8rem; }
+
+.title-link {
+  background: none; border: none; padding: 0; margin: 0;
+  font: inherit; color: inherit; text-align: left; cursor: pointer;
+}
+.title-link:hover { text-decoration: underline; }
+
+/* ============================================================
+   テーブル
+   ============================================================ */
+.table-wrap { overflow-x: auto; }
+
+.location-assignment-table-wrap {
+  overflow-y: auto;
+  max-height: 420px;
+}
+
+.location-assignment-table-wrap thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.location-assignment-table-wrap thead th {
+  background: var(--muted-bg);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#search-table-wrap {
+  max-height: 560px;
+  width: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+#search-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#search-table thead th {
+  background: var(--muted-bg);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table thead { background: var(--muted-bg); }
+.data-table th {
+  padding: .6rem .85rem;
+  font-size: .79rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: .55rem .85rem;
+  border-bottom: 1px solid var(--border);
+  font-size: .87rem;
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: hsl(40,15%,97%); }
+.data-table .empty-row td { text-align: center; color: var(--muted); padding: 2.2rem; }
+
+#search-table {
+  width: calc(100% - 2px);
+  min-width: 940px;
+  table-layout: fixed;
+}
+
+#search-table th,
+#search-table td {
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  padding: .45rem .35rem;
+}
+
+#search-table td {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#search-table thead th:nth-child(1) { min-width: 42px; }
+#search-table thead th:nth-child(2) { min-width: 48px; }
+#search-table thead th:nth-child(3) { min-width: 280px; }
+#search-table thead th:nth-child(4) { min-width: 75px; }
+#search-table thead th:nth-child(5) { min-width: 80px; }
+#search-table thead th:nth-child(6) { min-width: 95px; }
+#search-table thead th:nth-child(7) { min-width: 90px; }
+#search-table thead th:nth-child(8),
+#search-table thead th:nth-child(9) { min-width: 48px; }
+#search-table thead th:nth-child(10) { min-width: 55px; }
+#search-table thead th:nth-child(11) { min-width: 45px; }
+
+#search-table .title-link {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.search-sub-attribute {
+  display: block;
+}
+
+#search-table .c-author,
+#search-table .c-pub {
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+#search-table .split-cell {
+  padding: 0;
+  white-space: nowrap;
+}
+
+#search-table .cell-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+#search-table .top-item,
+#search-table .bottom-item {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.25rem;
+  padding: .45rem .35rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow-wrap: normal;
+}
+
+#search-table .bottom-item {
+  border-top: 1px solid var(--border);
+  background: hsl(40, 15%, 98%);
+  color: var(--muted);
+}
+
+#search-table .title-link {
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+#search-table .c-check,
+#search-table .c-stock,
+#search-table .c-rental,
+#search-table .c-del {
+  text-align: center;
+}
+
+.search-filter-select {
+  width: 100%;
+}
+
+.bulk-table .search-filter-select {
+  min-width: 0;
+}
+
+.series-modal {
+  width: min(720px, calc(100vw - 2rem));
+  max-width: 720px;
+}
+
+.series-modal .modal-footer {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.series-modal .modal-footer .btn {
+  flex: 0 1 auto;
+}
+
+.loan-user-management {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 901px) {
+  #bulk-table {
+    display: block;
+  }
+
+  #bulk-table thead {
+    display: none;
+  }
+
+  #bulk-table tbody {
+    display: block;
+  }
+
+  #bulk-table tbody tr[data-idx] {
+    display: grid;
+    grid-template-columns: 3rem 8rem minmax(18rem, 2.5fr) minmax(8rem, 1fr) minmax(8rem, 1fr) minmax(7rem, 1fr) 2.5rem;
+    grid-template-areas:
+      "no isbn title author genre rental del"
+      ". . title pub sub loc .";
+    grid-template-rows: minmax(3.1rem, auto) minmax(3.1rem, auto);
+    gap: .35rem .45rem;
+    padding: .65rem .6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #bulk-table tbody tr[data-idx] td {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: .15rem .2rem;
+    border: 0;
+  }
+
+  #bulk-table tbody tr[data-idx] td:not(.c-no):not(.c-del)::before {
+    content: attr(data-label);
+    margin-bottom: .18rem;
+    color: var(--muted);
+    font-size: .67rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #bulk-table .c-no { grid-area: no; }
+  #bulk-table .c-isbn { grid-area: isbn; }
+  #bulk-table .c-title { grid-area: title; grid-row: span 2; align-self: stretch; }
+  #bulk-table .c-author { grid-area: author; }
+  #bulk-table .c-pub { grid-area: pub; }
+  #bulk-table .c-genre { grid-area: genre; }
+  #bulk-table .c-sub-attributes { grid-area: sub; }
+  #bulk-table .c-rental { grid-area: rental; }
+  #bulk-table .c-loc { grid-area: loc; }
+  #bulk-table .c-del { grid-area: del; align-self: start; justify-self: end; }
+
+  #bulk-table .c-title textarea {
+    flex: 1;
+    min-height: 6.5rem;
+    text-align: center;
+    resize: vertical;
+  }
+
+  #bulk-table .bulk-row-errors {
+    text-align: center;
+  }
+}
+
+.book-sub-attributes {
+  display: block;
+  margin-top: .2rem;
+  color: var(--muted);
+  font-size: .73rem;
+}
+
+.inline-check {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: .4rem;
+  font-size: .78rem;
+}
+
+.attribute-r18-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+}
+
+.state-bulk-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  padding: .65rem;
+  margin-bottom: .75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--muted-bg);
+}
+
+.state-bulk-toolbar label {
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.state-bulk-toolbar select {
+  min-width: 11rem;
+  padding: .35rem .5rem;
+}
+
+.action-cell { display: flex; gap: .3rem; justify-content: flex-end; }
+
+/* ソート可能ヘッダー */
+.sortable th[data-sort]:not([data-sort="row"]) { cursor: pointer; }
+.sortable th[data-sort]:not([data-sort="row"])::after { content: '⇅'; font-size: .7rem; margin-left: .25rem; opacity: .4; }
+.sortable th[data-sort].sorted-asc::after  { content: '▲'; opacity: .9; }
+.sortable th[data-sort].sorted-desc::after { content: '▼'; opacity: .9; }
+
+/* 検索テーブル行ホバー・選択 */
+#search-table tbody tr { cursor: pointer; }
+#search-table tbody tr.row-selected td { background: var(--primary-light) !important; }
+#search-table tbody tr.row-outofstock td {
+  background: var(--danger-light) !important;
+  color: var(--danger);
+}
+#search-table tbody tr.row-selected.row-outofstock td {
+  background: hsl(0, 65%, 92%) !important;
+}
+
+/* 列リサイズハンドル */
+.th-resizer {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  background: transparent;
+  z-index: 3;
+}
+.th-resizer:hover { background: linear-gradient(to right, transparent 4px, var(--primary) 4px); }
+
+/* ============================================================
+   検索
+   ============================================================ */
+.search-card { padding-bottom: .9rem; }
+
+.search-row {
+  display: flex;
+  gap: .65rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.search-attribute-filters {
+  display: grid;
+  gap: .35rem;
+  min-width: 12rem;
+}
+
+.search-attribute-heading,
+.search-attribute-filter label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.search-attribute-filter .search-filter-select {
+  margin-top: .2rem;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: .6rem;
+}
+
+.result-count { font-size: .82rem; color: var(--muted); }
+
+/* ============================================================
+   まとめて登録
+   ============================================================ */
+.bulk-isbn-row {
+  display: flex;
+  align-items: flex-end;
+  gap: .75rem;
+  margin-bottom: .75rem;
+  flex-wrap: wrap;
+}
+
+.bulk-table-wrap {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 420px;
+  margin-bottom: .5rem;
+}
+
+.bulk-table { width: 100%; border-collapse: collapse; }
+
+/* 粘着ヘッダー */
+.bulk-table thead { position: sticky; top: 0; z-index: 2; }
+.bulk-table thead th {
+  padding: .55rem .6rem;
+  background: var(--muted-bg);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.bulk-table td {
+  padding: .35rem .4rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.bulk-table tr:last-child td { border-bottom: none; }
+
+.bulk-table input,
+.bulk-table select,
+.bulk-table textarea {
+  width: 100%;
+  padding: .3rem .45rem;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  font-size: .83rem;
+  background: #fff;
+}
+
+.bulk-table input:focus,
+.bulk-table select:focus,
+.bulk-table textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(30,100,70,.12);
+}
+
+.bulk-table tr.fetching td { background: hsl(210,40%,98%); }
+.bulk-table tr.fetch-done td { background: hsl(142,40%,97%); }
+.bulk-table tr.fetch-error td { background: var(--danger-light); }
+
+.bulk-table tr.bulk-row-invalid td {
+  background: var(--danger-light) !important;
+}
+
+.bulk-table tr.bulk-row-pending td {
+  background: hsl(210, 50%, 97%) !important;
+}
+
+.bulk-table input.input-error,
+.bulk-table select.input-error,
+.bulk-table textarea.input-error {
+  border-color: var(--danger);
+  background: hsl(0, 70%, 98%);
+}
+
+.bulk-row-errors {
+  margin-top: .2rem;
+  color: var(--danger);
+  font-size: .72rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.bulk-row-errors.pending {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.bulk-hint { font-size: .78rem; color: var(--muted); margin-bottom: .5rem; }
+
+/* ============================================================
+   貸出管理 — 縦並びレイアウト
+   ============================================================ */
+.loan-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   バッジ・ステータス
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: .15rem .5rem;
+  border-radius: 99px;
+  font-size: .74rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-lending { background: var(--green-light); color: var(--green); border: 1px solid hsl(142,30%,75%); }
+.badge-returned { background: var(--muted-bg); color: var(--muted); border: 1px solid var(--border); }
+.badge-overdue { background: var(--danger-light); color: var(--danger); border: 1px solid hsl(0,60%,80%); }
+
+/* ============================================================
+   モーダル
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal-overlay[hidden] { display: none !important; }
+
+.modal-box {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-box--sm { max-width: 400px; }
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 { font-size: .95rem; font-weight: 700; }
+
+.modal-close { background: none; border: none; color: var(--muted); display: flex; align-items: center; }
+.modal-close:hover { color: var(--fg); }
+
+.modal-body { padding: 1.1rem; }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  padding: .9rem 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+.series-radio-row { display: flex; gap: 1rem; font-size: .85rem; }
+
+/* ============================================================
+   トースト
+   ============================================================ */
+#toast-area {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  z-index: 300;
+  pointer-events: none;
+}
+
+.toast {
+  padding: .6rem 1rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  font-size: .84rem;
+  font-weight: 500;
+  animation: toastIn .2s ease;
+  max-width: 300px;
+  pointer-events: auto;
+}
+
+.toast-success { background: var(--green); color: #fff; }
+.toast-error   { background: var(--danger); color: #fff; }
+.toast-info    { background: var(--fg); color: #fff; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   フッター
+   ============================================================ */
+footer { text-align: center; padding: 1.2rem; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--border); }
+
+/* ============================================================
+   ユーティリティ
+   ============================================================ */
+.mono { font-family: Menlo, 'Courier New', monospace; font-size: .8rem; }
+.text-muted  { color: var(--muted); }
+.text-danger { color: var(--danger); font-weight: 600; }
+.text-green  { color: var(--green); font-weight: 600; }
+
+/* ============================================================
+   結果ヘッダー アクション群
+   ============================================================ */
+.result-actions {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  margin-left: auto;
+}
+
+.result-actions[hidden] { display: none; }
+
+/* 書籍検索 — 状態変更パネル */
+.state-change-modal { max-width: 760px; }
+
+.state-change-list {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.state-change-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: .75rem .85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.state-change-row:last-child { border-bottom: none; }
+
+.state-change-title {
+  min-width: 0;
+  overflow: hidden;
+  font-size: .86rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.state-choice-group {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--input-border);
+}
+
+.state-choice {
+  min-width: 4.7rem;
+  padding: .38rem .65rem;
+  border: none;
+  border-right: 1px solid var(--input-border);
+  background: #f1f2f4;
+  color: var(--muted);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 600;
+  transition: background .15s, color .15s, box-shadow .15s;
+}
+
+.state-choice:last-child { border-right: none; }
+.state-choice:hover { background: #e2e4e8; color: var(--fg); }
+.state-choice:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.state-choice.is-active {
+  color: #fff;
+  background: var(--primary);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
+}
+
+.state-choice--normal.is-active {
+  background: #2f7658;
+}
+
+.state-choice--provisional.is-active {
+  background: #d97706;
+}
+
+.state-choice--purchase_planned.is-active {
+  background: #6a5acd;
+}
+
+/* ============================================================
+   貸出済み行の灰色化（返却済み行）
+   ============================================================ */
+#loan-tbody tr.loan-returned td {
+  background: hsl(0, 0%, 96%) !important;
+  color: var(--muted);
+}
+#loan-tbody tr.loan-returned .badge-returned {
+  opacity: .7;
+}
+
+/* ============================================================
+   まとめて登録 / 書籍検索  スマホ・タブレット カードレイアウト
+   ============================================================ */
+@media (max-width: 900px) {
+
+  .bulk-table-wrap,
+  #search-table-wrap { overflow-x: visible; }
+
+  /* テーブル全体をブロック化 */
+  table.bulk-table,
+  table#search-table { display: block; border: none; background: transparent; }
+  table#search-table { width: 100%; min-width: 0; table-layout: auto; }
+
+  table.bulk-table thead,
+  table#search-table thead { display: none; }
+
+  table.bulk-table tbody,
+  table#search-table tbody { display: block; }
+
+  .state-change-row {
+    grid-template-columns: 1fr;
+    gap: .55rem;
+  }
+
+  .state-choice-group { width: 100%; }
+  .state-choice { flex: 1; }
+
+  /* ---- 1行 = カード1枚 ---- */
+  table.bulk-table tr,
+  table#search-table tr {
+    display: grid;
+    grid-template-columns: 2rem 1fr 1fr 1fr 1fr 2.4rem;
+    grid-template-areas:
+      "no   isbn  isbn  isbn  isbn  del"
+      "title title title title title title"
+      "author author pub pub genre genre"
+      "stock rental loc loc loc   loc";
+    gap: .35rem .45rem;
+    padding: .65rem .6rem;
+    margin-bottom: .55rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    cursor: default;
+  }
+
+  table#bulk-table tr[data-idx] {
+    display: grid;
+    grid-template-columns: 2rem minmax(4.5rem, 1fr) minmax(0, 1fr) minmax(0, 1fr) 2.4rem;
+    grid-template-areas:
+      "no isbn title title del"
+      "author author author pub pub"
+      "genre genre sub sub sub"
+      "rental rental loc loc loc";
+    gap: .35rem .45rem;
+    padding: .65rem .6rem;
+    margin-bottom: .55rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    cursor: default;
+  }
+
+  /* 書籍検索はチェックボックスを右上に配置 */
+  table#search-table tr {
+    grid-template-areas:
+      "no   isbn  isbn  isbn  check del"
+      "title title title title title title"
+      "author author pub pub genre genre"
+      "sub sub sub sub sub sub"
+      "stock rental loc loc loc   loc";
+    cursor: pointer;
+  }
+
+  /* fetching / done / error 色はカード単位で */
+  table.bulk-table tr.fetching   { background: hsl(210,40%,98%); }
+  table.bulk-table tr.fetch-done { background: hsl(142,40%,97%); }
+  table.bulk-table tr.fetch-error{ background: var(--danger-light); }
+
+  /* 行選択ハイライト */
+  table#search-table tr.row-selected {
+    background: var(--primary-light);
+    border-color: var(--primary);
+  }
+
+  /* 各セル */
+  table.bulk-table td,
+  table#search-table td {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border: none !important;
+    background: transparent !important;
+    min-width: 0;
+  }
+
+  /* セルラベル（No./削除/チェック以外） */
+  table.bulk-table td:not(.c-no):not(.c-del)::before,
+  table#search-table td:not(.c-no):not(.c-del):not(.c-check)::before {
+    content: attr(data-label);
+    font-size: .67rem;
+    font-weight: 700;
+    color: var(--muted);
+    line-height: 1;
+    margin-bottom: .18rem;
+    white-space: nowrap;
+  }
+
+  /* グリッドエリア */
+  .c-no    { grid-area: no;     align-self: center; font-weight: 700; color: var(--muted); font-size: .82rem; }
+  .c-isbn  { grid-area: isbn; }
+  .c-title { grid-area: title; }
+  .c-author{ grid-area: author; }
+  .c-pub   { grid-area: pub; }
+  .c-genre { grid-area: genre; }
+  .c-sub-attributes { grid-area: sub; }
+  .c-stock { grid-area: stock; }
+  .c-rental{ grid-area: rental; }
+  .c-loc   { grid-area: loc; }
+  .c-del   { grid-area: del;   align-self: center; justify-self: end; }
+  .c-check { grid-area: check; align-self: center; justify-self: center; }
+
+  /* input / select を全幅に */
+  table.bulk-table td input:not([type="checkbox"]),
+  table.bulk-table td select,
+  table.bulk-table td textarea,
+  table#search-table td input:not([type="checkbox"]),
+  table#search-table td select {
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* 書籍検索のテキスト表示 */
+  table#search-table td { font-size: .88rem; }
+  table#search-table .c-title .title-link {
+    font-size: .92rem;
+    font-weight: 600;
+    white-space: normal;
+    text-align: left;
+    padding: .1rem 0;
+  }
+  table#search-table .c-isbn { font-size: .8rem; color: var(--muted); }
+
+  /* bulk の行ステータス色上書き防止 */
+  table.bulk-table tr.fetching td,
+  table.bulk-table tr.fetch-done td,
+  table.bulk-table tr.fetch-error td { background: transparent !important; }
+}
+
+/* ============================================================
+   スマートフォンレイアウト
+   ============================================================ */
+@media (max-width: 1000px) {
+  .header-inner { gap: .5rem; }
+
+  nav {
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    flex-direction: column;
+    padding: .4rem .8rem .6rem;
+    display: none;
+    margin-left: 0;
+    z-index: 99;
+    overflow-x: visible;
+  }
+
+  nav.open { display: flex; }
+
+  .tab-btn { border-radius: var(--radius); border-bottom: none; justify-content: flex-start; }
+  .tab-btn.active { background: rgba(255,255,255,.12); color: #fff; border-bottom-color: transparent; }
+
+  .header-actions { margin-left: auto; }
+  .nav-toggle { display: inline-flex; }
+  main { padding: 1.1rem .9rem 2.5rem; }
+}
+
+/* ============================================================
+   スマートフォン詳細調整（600px以下）
+   ============================================================ */
+@media (max-width: 600px) {
+
+  /* まとめて登録: ボタンを縦並び・同幅 */
+  .bulk-isbn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bulk-isbn-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 書籍検索: 検索バーを2列グリッド */
+  .search-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+  }
+  .search-row .form-group:first-child {
+    grid-column: span 2;
+  }
+  .search-row .btn {
+    grid-column: span 2;
+    justify-content: center;
+  }
+
+  /* 結果ヘッダー: ボタンを折り返し */
+  .result-header {
+    flex-wrap: wrap;
+    gap: .4rem;
+  }
+  .result-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .result-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* 書籍登録・利用者登録: form-actionsを縦積み */
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .form-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* 貸出管理のカード内ボタン */
+  #tab-loan .btn[style*="width:100%"] {
+    margin-top: .5rem;
+  }
+
+  /* モーダルを全幅に近く */
+  .modal-box {
+    max-width: 100%;
+    margin: 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    align-self: flex-end;
+  }
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  /* ログインボックス */
+  #login-box {
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  #login-overlay {
+    align-items: flex-end;
+  }
+}
+
+/* ============================================================
+   統計
+   ============================================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .stats-grid { grid-template-columns: 1fr; } }
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+.stat-label { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; color: var(--muted); margin-bottom: .4rem; }
+.stat-value { font-size: 2rem; font-weight: 700; line-height: 1; }
+.stat-sub   { font-size: .75rem; color: var(--muted); margin-top: .2rem; }
+
+.stats-charts { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; }
+@media (max-width: 900px) { .stats-charts { grid-template-columns: 1fr; } }
+
+.chart-card .chart-body { display: flex; flex-direction: column; align-items: center; gap: .75rem; width: 100%; }
+#stats-genre-canvas { width: 100%; max-width: 100%; height: 320px; max-height: none; }
+.stats-empty { font-size: .82rem; color: var(--muted); }
+
+.sys-info { display: flex; flex-direction: column; }
+.sys-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .88rem;
+}
+.sys-row:last-child { border-bottom: none; }
+.sys-label { color: var(--muted); }
+.sys-value { font-weight: 500; }
+
+/* ============================================================
+   ログインオーバーレイ
+   ============================================================ */
+#login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+#login-overlay[hidden] { display: none; }
+
+#login-box {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-md);
+}
+
+.login-logo { display: flex; align-items: center; gap: 10px; color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+.login-desc { color: var(--muted); font-size: .875rem; margin-bottom: 1.25rem; }
+.login-error { color: var(--danger); font-size: .875rem; min-height: 1.4rem; margin: .75rem 0 .25rem; }
+
+/* ヘッダーのログアウト */
+#header-user { display: flex; align-items: center; gap: 8px; margin-right: 8px; }
+#header-user[hidden] { display: none; }
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+  padding: .35rem .75rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.35);
+  color: rgba(255,255,255,.9);
+  border-radius: var(--radius);
+  transition: background .15s;
+}
+.btn-logout:hover { background: rgba(255,255,255,.15); }
+
+/* ============================================================
+   位置登録タブ
+   ============================================================ */
+.location-assignment-card { margin-top: 16px; }
+.location-assignment-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.location-assignment-header .card-title { margin-bottom: .25rem; }
+.card-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.location-assignment-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: .75rem;
+  padding: .9rem;
+  margin-bottom: 1rem;
+  background: var(--muted-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.location-assignment-toolbar .form-group { margin: 0; }
+.location-assignment-isbn { flex: 1.3; }
+.location-assignment-target { flex: 1; }
+.location-assignment-toolbar .btn { white-space: nowrap; min-height: 40px; }
+.location-assignment-toolbar input,
+.location-assignment-toolbar select { min-height: 40px; }
+#location-assignment-table .mono {
+  font-size: .82rem;
+  color: var(--primary);
+  white-space: nowrap;
+}
+.location-assignment-check,
+.location-assignment-action {
+  width: 64px;
+  text-align: center;
+}
+.location-assignment-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+}
+.location-assignment-author {
+  display: block;
+  color: var(--muted);
+  font-size: .78rem;
+  margin-top: .15rem;
+}
+.location-assignment-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.75rem !important;
+}
+.location-assignment-hint {
+  margin: .75rem 0 0;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+/* ============================================================
+   依頼一覧
+   ============================================================ */
+#request-list-tbody td { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ============================================================
+   検索フィルター — compact custom multi-select
+   Native select remains in the DOM as the source of truth for filtering.
+   ============================================================ */
+.search-multi-select {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.search-filter-select {
+  position: relative;
+  min-width: 0;
+}
+
+.search-filter-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  width: 100%;
+  min-height: 40px;
+  padding: .45rem .65rem;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: .86rem;
+  text-align: left;
+  transition: border-color .15s, background .15s, box-shadow .15s;
+}
+
+.search-filter-trigger:hover { border-color: var(--primary); background: var(--primary-light); }
+.search-filter-select.is-open .search-filter-trigger,
+.search-filter-trigger:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px hsla(160, 30%, 30%, .14);
+}
+
+.search-filter-summary {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-filter-summary.is-selected {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.search-filter-chevron {
+  flex: 0 0 auto;
+  color: var(--muted);
+  transition: transform .15s;
+}
+.search-filter-select.is-open .search-filter-chevron { transform: rotate(180deg); }
+
+.search-filter-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + .35rem);
+  left: 0;
+  right: 0;
+  display: none;
+  max-height: 248px;
+  overflow-y: auto;
+  padding: .3rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-md);
+}
+.search-filter-select.is-open .search-filter-menu { display: block; }
+
+.search-filter-option {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  width: 100%;
+  min-height: 36px;
+  padding: .48rem .5rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: .82rem;
+  text-align: left;
+  cursor: pointer;
+}
+.search-filter-option:hover,
+.search-filter-option:focus-visible { outline: none; background: var(--muted-bg); }
+.search-filter-option.is-selected { background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.search-filter-option-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.search-filter-tree,
+.search-filter-tree-children { margin: 0; padding: 0; list-style: none; }
+.search-filter-tree-children { display: none; margin-left: 1.2rem; padding-left: .45rem; border-left: 1px solid var(--border); }
+.search-filter-tree > li.is-expanded > .search-filter-tree-children { display: block; }
+.search-filter-tree > li > .search-filter-option { font-weight: 700; }
+.search-filter-tree > li.has-children > .search-filter-option .search-filter-option-label::after {
+  content: "　▾";
+  color: var(--muted);
+  font-size: .72rem;
+}
+.search-filter-tree > li.has-children.is-expanded > .search-filter-option .search-filter-option-label::after { content: "　▴"; }
+.search-filter-tree-children .search-filter-option { padding-left: .65rem; }
+.search-filter-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  color: var(--card-bg);
+  opacity: .45;
+}
+.search-filter-check svg { width: 13px; height: 13px; stroke-width: 2.7; }
+.search-filter-option.is-selected .search-filter-check {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-fg);
+  opacity: 1;
+}
+
+.search-filter-help {
+  display: block;
+  margin-top: .3rem;
+  color: var(--muted);
+  font-size: .7rem;
+}
+
+/* ============================================================
+   貸出管理 — calm desktop desk, stacked touch-first mobile
+   ============================================================ */
+#tab-loan .loan-grid { align-items: stretch; }
+#tab-loan .loan-grid > .card {
+  position: relative;
+  padding: 1.15rem;
+}
+#tab-loan .loan-grid > .card:first-child { border-top: 3px solid var(--primary); }
+#tab-loan .loan-grid > .card:last-child { border-top: 3px solid var(--accent); }
+#tab-loan .loan-grid .card-title { margin-bottom: 1rem; }
+.loan-action-card .form-group + .form-group { margin-top: .85rem; }
+.loan-action-card .form-group label { font-weight: 700; }
+.loan-action-card select[multiple] {
+  min-height: 9rem;
+  line-height: 1.45;
+}
+.loan-action-card select[multiple] option {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.loan-action-card select,
+.loan-action-card input[type="date"] { min-height: 42px; }
+.loan-action-card select[multiple] { padding: .35rem; }
+.loan-action-card .btn { min-height: 44px; justify-content: center; margin-top: .9rem; }
+.loan-action-card--lend .btn-primary { box-shadow: 0 4px 10px hsla(174, 31%, 30%, .18); }
+.loan-action-card--return .btn-secondary { background: hsl(35, 67%, 46%); color: var(--primary-fg); }
+.loan-action-card--return .btn-secondary:hover { background: hsl(35, 67%, 40%); }
+
+#loan-table { table-layout: fixed; }
+#loan-table td:nth-child(1) { width: 18%; }
+#loan-table td:nth-child(2) { width: 31%; }
+#loan-table td:nth-child(3),
+#loan-table td:nth-child(4),
+#loan-table td:nth-child(5),
+#loan-table td:nth-child(6) { width: 12.75%; }
+#loan-table .loan-user-cell,
+#loan-table .loan-book-cell {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+#loan-table .loan-status-cell { white-space: nowrap; }
+
+@media (max-width: 900px) {
+  #tab-loan .loan-grid { gap: .85rem; }
+  #tab-loan .loan-grid > .card { padding: 1rem; }
+  #tab-loan .table-wrap { overflow-x: visible; }
+  #loan-table,
+  #loan-table thead,
+  #loan-table tbody,
+  #loan-table tr,
+  #loan-table td { display: block; }
+  #loan-table thead { display: none; }
+  #loan-table tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "status status"
+      "book book"
+      "user user"
+      "loan due"
+      "returned returned";
+    gap: .7rem .8rem;
+    margin: 0 0 .7rem;
+    padding: .9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(35, 45, 42, .06);
+  }
+  #loan-table tr:last-child { margin-bottom: 0; }
+  #loan-table td {
+    width: auto !important;
+    min-width: 0;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  #loan-table td::before {
+    display: block;
+    margin-bottom: .2rem;
+    color: var(--muted);
+    content: attr(data-label);
+    font-size: .68rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  #loan-table .loan-status-cell { grid-area: status; }
+  #loan-table .loan-book-cell { grid-area: book; font-size: .95rem; font-weight: 700; }
+  #loan-table .loan-user-cell { grid-area: user; }
+  #loan-table .loan-date-cell { grid-area: loan; }
+  #loan-table .loan-due-cell { grid-area: due; }
+  #loan-table .loan-returned-cell { grid-area: returned; }
+}
+
+@media (max-width: 600px) {
+  .search-filter-menu { max-height: 230px; }
+  .search-filter-option { min-height: 42px; }
+  #tab-loan .loan-grid { grid-template-columns: 1fr; }
+  #tab-loan .loan-action-card { min-width: 0; }
+  #tab-loan .loan-action-card select[multiple] { min-height: 10.5rem; }
+  #tab-loan .loan-action-card .btn { width: 100% !important; }
+  #tab-loan .table-wrap { width: 100%; }
+  #tab-loan .card { overflow: hidden; }
+  .loan-requests-card .table-wrap { overflow-x: visible; }
+  .loan-requests-card table,
+  .loan-requests-card thead,
+  .loan-requests-card tbody,
+  .loan-requests-card tr,
+  .loan-requests-card td { display: block; }
+  .loan-requests-card thead { display: none; }
+  .loan-requests-card tbody { display: grid; gap: .7rem; }
+  .loan-requests-card tr:not(.empty-row) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "book book"
+      "requester contact"
+      "message message"
+      "date action";
+    gap: .7rem .8rem;
+    padding: .9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+  }
+  .loan-requests-card tr:not(.empty-row) td {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .loan-requests-card tr:not(.empty-row) td::before {
+    display: block;
+    margin-bottom: .2rem;
+    color: var(--muted);
+    content: attr(data-label);
+    font-size: .68rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .loan-requests-card .request-book-cell { grid-area: book; font-size: .95rem; font-weight: 700; }
+  .loan-requests-card .requester-cell { grid-area: requester; }
+  .loan-requests-card .request-contact-cell { grid-area: contact; }
+  .loan-requests-card .request-message-cell { grid-area: message; }
+  .loan-requests-card .request-date-cell { grid-area: date; }
+  .loan-requests-card .request-action-cell {
+    grid-area: action;
+    align-items: stretch;
+    justify-content: end;
+  }
+  .loan-requests-card .request-action-cell .btn {
+    width: 100%;
+    min-height: 42px;
+    white-space: normal;
+  }
+  .loan-requests-card tr.empty-row td {
+    display: block;
+    padding: 1rem;
+  }
+  .loan-requests-card tr.empty-row td::before { display: none; }
+}
+
+@media (max-width: 420px) {
+  main { padding-left: .7rem; padding-right: .7rem; }
+  .card { padding: .95rem; }
+  #loan-table tr { padding: .8rem; }
+  #loan-table .loan-book-cell { font-size: .9rem; }
+}

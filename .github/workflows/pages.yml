@@ -1,0 +1,60 @@
+name: Deploy unlisted library pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare unlisted pages
+        env:
+          LIBRARY_PAGES_PATH: ${{ secrets.LIBRARY_PAGES_PATH }}
+        run: |
+          if [[ ! "$LIBRARY_PAGES_PATH" =~ ^[a-f0-9]{32,64}$ ]]; then
+            echo "::error::Set the repository secret LIBRARY_PAGES_PATH to a random 32-64 character lowercase hexadecimal string."
+            exit 1
+          fi
+
+          mkdir -p "site/$LIBRARY_PAGES_PATH/catalog" \
+                   "site/$LIBRARY_PAGES_PATH/list" \
+                   "site/$LIBRARY_PAGES_PATH/sistem"
+          cp catalog/index.html "site/$LIBRARY_PAGES_PATH/catalog/index.html"
+          cp list/index.html "site/$LIBRARY_PAGES_PATH/list/index.html"
+          cp sistem/index.html sistem/app.js sistem/style.css \
+            "site/$LIBRARY_PAGES_PATH/sistem/"
+          cp favicon.svg "site/$LIBRARY_PAGES_PATH/favicon.svg"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
