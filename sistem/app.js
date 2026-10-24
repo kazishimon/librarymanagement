@@ -1893,7 +1893,7 @@ function renderBulkTable() {
       return `<tr data-idx="${i}" class="${rowClasses}">
       <td class="c-no mono" style="text-align:center;">${i + 1}</td>
       <td class="c-isbn" data-label="ISBN"><input class="bulk-isbn-val${isbnHasError ? " input-error" : ""}" type="text" value="${escHtml(r.isbn)}" placeholder="ISBN" aria-invalid="${isbnHasError}" /></td>
-      <td class="c-title" data-label="タイトル ✱"><input class="bulk-title${titleHasError ? " input-error" : ""}" rows="2" placeholder="タイトル（必須）" aria-invalid="${titleHasError}">${escHtml(r.title)}</input><div class="bulk-row-errors${hasPending && !hasError ? " pending" : ""}"${rowErrors ? "" : " hidden"}>${escHtml(rowErrors)}</div></td>
+      <td class="c-title" data-label="タイトル ✱"><input class="bulk-title${titleHasError ? " input-error" : ""}" type="text" value="${escHtml(r.title)}" placeholder="タイトル（必須）" aria-invalid="${titleHasError}" /><div class="bulk-row-errors${hasPending && !hasError ? " pending" : ""}"${rowErrors ? "" : " hidden"}>${escHtml(rowErrors)}</div></td>
       <td class="c-author" data-label="著者"><input class="bulk-author" type="text" value="${escHtml(r.author)}" placeholder="著者" /></td>
       <td class="c-pub" data-label="出版社"><input class="bulk-pub" type="text" value="${escHtml(r.publisher)}" placeholder="出版社" /></td>
       <td class="c-genre" data-label="主属性"><select class="bulk-genre${mainAttributeHasError ? " input-error" : ""}" aria-invalid="${mainAttributeHasError}" required>${buildGenreOptions(r.genre)}</select></td>
